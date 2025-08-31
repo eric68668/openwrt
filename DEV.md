@@ -44,14 +44,32 @@ make -j4 V=s
 ls bin/target/mediatek/filogic/
 ```
 
+====
+
+1. 修改 TargetProfile 为 H3C NX30 Pro 114B
+2. 去掉 Image Builder & SDK
+3. 修改 Version Code 为 24.10.2
+4. 修改 opkg instead apk
+5. 修改内核 6.6.93，默认的 6.6.95-1-42059a7a690001cb2b81a20822308b67 无法安装软件
+  #CONFIG_HAS_TESTING_KERNEL=y
+~5. 修改 mirror~
+6. 下载 feeds.conf.default，确保为 24.10.2
+
+```bash
+make clean
+./scripts/feeds update -a
+./scripts/feeds install -a
+make -j4 V=s
+```
+
 
 ====
 
 V1 Bug
 
-1. opkg包管理器 /etc/apk/repositories.d/distfeeds.list  配置的包路径不正确，导致无法安装软件
+1. 包管理器使用了apk，导致无法安装软件
 
-> make menuconfig  # 检查 Target System 和 Subtarget 是否匹配
+> make menuconfig  # 修复 Base 下包管理器，去掉apk，勾选opkg
 
 2. Frimware Version 展示 OpenWrt SNAPSHOT r30265-4e0d1b6a4f0
 
