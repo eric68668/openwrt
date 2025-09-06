@@ -1,0 +1,9 @@
+services:
+  openwrt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./output:/home/openwrt/output
+    tty: true
+    stdin_open: true

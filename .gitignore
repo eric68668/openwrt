@@ -35,3 +35,8 @@ git-src
 .cproject
 .ccache
 .vscode*
+
+# Ignore output directory but keep specific config files
+/output/*
+!/output/.config*
+!/output/feeds.conf.default*
